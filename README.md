@@ -10,6 +10,6 @@ Run `npm run dev` for a dev server at localhost from your environment variable i
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Build
+## Production Server
 
 Run `npm start` to serve build server.
