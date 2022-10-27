@@ -1,0 +1,41 @@
+{
+  "name": "angular-webauthn-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "engines": {
+    "node": "16.16.0"
+  },
+  "scripts": {
+    "start": "node dist/app.js",
+    "serve": "nodemon dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "bcrypt": "^5.1.0",
+    "cbor": "^8.1.0",
+    "deps": "^1.0.0",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.5",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/jwk-to-pem": "^2.0.1",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^18.11.0",
+    "@types/validator": "^13.7.9",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
