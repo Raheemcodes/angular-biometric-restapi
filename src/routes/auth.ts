@@ -29,11 +29,7 @@ router.post(
   webauthnReg
 );
 
-router.post(
-  '/webauthn-reg-verification',
-
-  webauthnRegVerification
-);
+router.post('/webauthn-reg-verification', webauthnRegVerification);
 
 export const authRoutes = router;
 
