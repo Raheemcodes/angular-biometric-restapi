@@ -29,16 +29,16 @@ const webauthnLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, func
         const name = req.body.username.toLowerCase();
         if (!errors.isEmpty())
             throw (0, error_1.handleReqError)(errors);
-        const user = yield users_1.User.findOne({ name });
-        yield crypto_1.default.randomBytes(32, (err, buf) => {
+        crypto_1.default.randomBytes(32, (err, buf) => __awaiter(void 0, void 0, void 0, function* () {
             if (err)
                 throw err;
+            const user = yield users_1.User.findOne({ name });
             const challenge = buf.toString('hex');
             user.webauthn.challenge = challenge;
             user.webauthn.resetChallengeExpiration = new Date(Date.now() + 60000);
             user.save();
             res.status(201).send((0, util_1.PubKeyCredOption)(user, challenge));
-        });
+        }));
     }
     catch (err) {
         next(err);
