@@ -22,10 +22,11 @@ export const webauthnLogin = async (
 
     if (!errors.isEmpty()) throw handleReqError(errors);
 
+    const user = await User.findOne({ name });
+
     crypto.randomBytes(32, async (err: Error | null, buf: Buffer) => {
       if (err) throw err;
 
-      const user = await User.findOne({ name });
       const challenge = buf.toString('hex');
       user!.webauthn!.challenge = challenge;
       user!.webauthn!.resetChallengeExpiration = new Date(Date.now() + 60000);
