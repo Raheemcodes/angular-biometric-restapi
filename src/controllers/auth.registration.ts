@@ -19,7 +19,7 @@ export const webauthnReg = async (
 
     if (!errors.isEmpty()) throw handleReqError(errors);
 
-    crypto.randomBytes(32, async (err: Error | null, buf: Buffer) => {
+    crypto.randomBytes(32, (err: Error | null, buf: Buffer) => {
       if (err) throw err;
 
       const challenge: string = buf.toString('hex');
@@ -28,11 +28,13 @@ export const webauthnReg = async (
         resetChallengeExpiration: new Date(Date.now() + 60000),
       };
       const user = new User({ name: username, webauthn });
-      const { _id } = await user.save();
+      user.save();
 
       res
         .status(201)
-        .send(createPublickCredentials(_id.toString(), username, challenge));
+        .send(
+          createPublickCredentials(user._id.toString(), username, challenge)
+        );
     });
   } catch (err) {
     next(err);

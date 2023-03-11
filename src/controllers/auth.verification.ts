@@ -24,7 +24,7 @@ export const webauthnLogin = async (
 
     const user = await User.findOne({ name });
 
-    crypto.randomBytes(32, async (err: Error | null, buf: Buffer) => {
+    crypto.randomBytes(32, (err: Error | null, buf: Buffer) => {
       if (err) throw err;
 
       const challenge = buf.toString('hex');
