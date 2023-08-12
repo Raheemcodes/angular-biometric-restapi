@@ -22,17 +22,18 @@ export const webauthnLogin = async (
 
     if (!errors.isEmpty()) throw handleReqError(errors);
 
-    const user = await User.findOne({ name });
-
-    crypto.randomBytes(32, (err: Error | null, buf: Buffer) => {
+    crypto.randomBytes(32, async (err: Error | null, buf: Buffer) => {
       if (err) throw err;
 
+      const user = await User.findOne({ name });
+      console.log('fetched....');
       const challenge = buf.toString('hex');
       user!.webauthn!.challenge = challenge;
       user!.webauthn!.resetChallengeExpiration = new Date(Date.now() + 60000);
       user!.save();
 
       res.status(201).send(PubKeyCredOption(user, challenge));
+      console.log('sent');
     });
   } catch (err) {
     next(err);

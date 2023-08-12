@@ -33,11 +33,13 @@ const webauthnLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, func
             if (err)
                 throw err;
             const user = yield users_1.User.findOne({ name });
+            console.log('fetched....');
             const challenge = buf.toString('hex');
             user.webauthn.challenge = challenge;
             user.webauthn.resetChallengeExpiration = new Date(Date.now() + 60000);
             user.save();
             res.status(201).send((0, util_1.PubKeyCredOption)(user, challenge));
+            console.log('sent');
         }));
     }
     catch (err) {

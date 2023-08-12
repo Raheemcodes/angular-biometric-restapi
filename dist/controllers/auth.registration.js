@@ -26,7 +26,7 @@ const webauthnReg = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         const username = req.body.username.toLowerCase();
         if (!errors.isEmpty())
             throw (0, error_1.handleReqError)(errors);
-        crypto_1.default.randomBytes(32, (err, buf) => __awaiter(void 0, void 0, void 0, function* () {
+        crypto_1.default.randomBytes(32, (err, buf) => {
             if (err)
                 throw err;
             const challenge = buf.toString('hex');
@@ -35,11 +35,11 @@ const webauthnReg = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
                 resetChallengeExpiration: new Date(Date.now() + 60000),
             };
             const user = new users_1.User({ name: username, webauthn });
-            const { _id } = yield user.save();
+            user.save();
             res
                 .status(201)
-                .send((0, util_1.createPublickCredentials)(_id.toString(), username, challenge));
-        }));
+                .send((0, util_1.createPublickCredentials)(user._id.toString(), username, challenge));
+        });
     }
     catch (err) {
         next(err);

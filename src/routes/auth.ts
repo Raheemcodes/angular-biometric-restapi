@@ -31,8 +31,6 @@ router.post(
 
 router.post('/webauthn-reg-verification', webauthnRegVerification);
 
-export const authRoutes = router;
-
 router.post(
   '/webauthn-login',
   [
@@ -51,3 +49,5 @@ router.post(
 );
 
 router.post('/webauthn-login-verification', webauthnLoginVerification);
+
+export const authRoutes = router;
