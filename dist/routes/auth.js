@@ -32,7 +32,6 @@ router.post('/webauthn-reg', [
     })),
 ], auth_registration_1.webauthnReg);
 router.post('/webauthn-reg-verification', auth_registration_1.webauthnRegVerification);
-exports.authRoutes = router;
 router.post('/webauthn-login', [
     (0, express_validator_1.body)('username', 'INVALID_USERNAME')
         .trim()
@@ -46,3 +45,4 @@ router.post('/webauthn-login', [
     })),
 ], auth_verification_1.webauthnLogin);
 router.post('/webauthn-login-verification', auth_verification_1.webauthnLoginVerification);
+exports.authRoutes = router;

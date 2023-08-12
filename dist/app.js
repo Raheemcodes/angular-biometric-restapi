@@ -31,7 +31,10 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', ACCESS_ORIGIN);
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
+    if (req.method == 'OPTIONS')
+        res.sendStatus(204);
+    else
+        next();
 });
 app.use(auth_1.authRoutes);
 app.use((error, req, res, next) => {
